@@ -1,23 +1,21 @@
 import React from 'react';
-
-import { Footer, Blog, Possibility, Features, WhatGPT3, Header } from './containers';
-import { CTA, Brand, Navbar } from './components';
-
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import LandingPage from './screens/LandingPage';
+import UploadImagePage from './screens/UploadImagePage';
+import UploadVideoPage from './screens/UploadVideoPage';
+import ResultsPage from './screens/ResultsPage';
 import './App.css';
 
 const App = () => (
   <div className="App">
-    <div className="gradient__bg">
-      <Navbar />
-      <Header />
-    </div>
-    <Brand />
-    <WhatGPT3 />
-    <Features />
-    <Possibility />
-    <CTA />
-    <Blog />
-    <Footer />
+    <BrowserRouter>
+      <Routes>
+        <Route path='/' element={<LandingPage />} />
+        <Route path='/upload-image' element={<UploadImagePage />} />
+        <Route path='/upload-video' element={<UploadVideoPage />} />
+        <Route path='/results' element={<ResultsPage />} />
+      </Routes>
+    </BrowserRouter>
   </div>
 );
 
