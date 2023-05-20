@@ -2,6 +2,7 @@ import React from 'react';
 import people from '../../assets/people.png';
 import ai from '../../assets/ai.png';
 import './header.css';
+import { Link } from 'react-router-dom';
 
 const Header = () => (
   <div className="gpt3__header section__padding" id="home">
@@ -11,7 +12,9 @@ const Header = () => (
 
       <div className="gpt3__header-content__input">
         <input type="email" placeholder="Your Email Address" />
-        <button type="button">Get Started</button>
+        <Link to="/upload-image">
+          <button type="button">Get Started</button>
+        </Link>
       </div>
 
       <div className="gpt3__header-content__people">
