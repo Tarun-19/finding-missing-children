@@ -7,7 +7,7 @@ import ResultsPage from './screens/ResultsPage';
 import './App.css';
 
 const App = () => (
-  <div className="App">
+  <div>
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<LandingPage />} />
