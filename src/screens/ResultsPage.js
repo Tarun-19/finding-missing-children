@@ -1,77 +1,98 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 import { Chart } from "react-google-charts";
-import processedData from '../utils/data';
-import { FallingLines } from 'react-loader-spinner'
-import BarLoader from 'react-bar-loader'
+import processedData from "../utils/data";
+import { FallingLines } from "react-loader-spinner";
+import BarLoader from "react-bar-loader";
 
 function ResultsPage(props) {
-    const [lineData, setlineData] = useState(processedData);
-    const [fallingLinesLoder, setfallingLinesLoder] = useState(true);
-    const [processing, setprocessing] = useState(true);
+  const [lineData, setlineData] = useState(processedData);
+  const [fallingLinesLoder, setfallingLinesLoder] = useState(true);
+  const [processing, setprocessing] = useState(true);
 
-    const options = {
-        chart: {
-            title: "Probe image matching line graph representation",
-            subtitle: "Percentage match Vs Video's timeline",
-        },
-    };
+  const options = {
+    chart: {
+      title: "Probe image matching line graph representation",
+      subtitle: "Percentage match Vs Video's timeline",
+    },
+  };
 
-    useEffect(() => {
-        console.log(1)
-        setTimeout(() => {
-            console.log(2)
-            setfallingLinesLoder(false);
-            console.log(3)
-            setprocessing(true);
-            console.log(4)
-        }, 1000);
-        console.log(5)
-    }, []);
+  useEffect(() => {
+    setTimeout(() => {
+      setfallingLinesLoder(false);
+      setprocessing(true);
+    }, 4000);
+  }, []);
 
-    useEffect(() => {
-        if (fallingLinesLoder || !processing) return;
-        console.log(6)
-        // setprocessing(false);
-        console.log(7)
+  useEffect(() => {
+    if (fallingLinesLoder || !processing) return;
+    setTimeout(() => {
+      setprocessing(false);
+    }, 4000);
+  }, [fallingLinesLoder]);
 
-        setTimeout(() => {
-            setprocessing(false);
-            console.log("done")
-        }, 1000);
-    }, [fallingLinesLoder]);
+  return (
+    <div style={{ backgroundColor: "pink" }}>
+      <h1 style={{ color: "red" }}>Results Page</h1>
+      {!processing && !fallingLinesLoder && (
+        <Chart
+          chartType="Line"
+          width="99%"
+          height="400px"
+          data={[["Video timeline", "Percentage Match"], ...lineData]}
+          options={options}
+          style={{display: "flex",
+          justifyContent: "center",
+          alignItems: "center",}}
+        />
+      )}
 
-    useEffect(() => {
-    // if(processing)
-    console.log("last")
-    }, [processing]);
-    console.log([fallingLinesLoder,processing])
-
-
-
-    return (
-        <div style={{ backgroundColor: 'pink' }}>
-            <h1 style={{ color: 'red' }}>Results Page</h1>
-            {!processing && !fallingLinesLoder && <Chart
-                chartType="Line"
-                width="100%"
-                height="400px"
-                data={[["Video timeline", "Percentage Match"], ...lineData]}
-                options={options}
-            />}
-
-            <p>aaaaaaa</p>
-
-            {processing && !fallingLinesLoder && <BarLoader color="#1D8BF1" height="3" style={{ marginTop: '10px', marginBottom: '10px' }} />}
-            <p>bbbbbb</p>
-            <FallingLines
-                color="#4fa94d"
-                width="100"
-                visible={fallingLinesLoder}
-                ariaLabel='falling-lines-loading'
-            />
-            <p>ccccccc</p>
+      {processing && !fallingLinesLoder && (
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            flexDirection: "column",
+            marginTop: '16%',
+          }}
+        >
+          <h4>Processing video...</h4>
+          <BarLoader
+            color="#1D8BF1"
+            height="4"
+            style={{
+              marginTop: "10px",
+              marginBottom: "10px",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              width: "55%",
+            }}
+          />
         </div>
-    );
+      )}
+
+      {fallingLinesLoder && (
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            flexDirection: "column",
+            marginTop: '15%'
+          }}
+        >
+          <h4>Extracting snapshots...</h4>
+          <FallingLines
+            color="#4fa94d"
+            width="100"
+            visible={true}
+            ariaLabel="falling-lines-loading"
+          />
+        </div>
+      )}
+    </div>
+  );
 }
 
 export default ResultsPage;
