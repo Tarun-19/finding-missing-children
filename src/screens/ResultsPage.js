@@ -3,8 +3,13 @@ import { Chart } from "react-google-charts";
 import processedData from "../utils/data";
 import { FallingLines } from "react-loader-spinner";
 import BarLoader from "react-bar-loader";
+import { useParams } from 'react-router-dom';
 
-function ResultsPage(props) {
+function ResultsPage() {
+  const { imageName, videoName } = useParams();
+  console.log(imageName);
+  console.log(videoName);
+
   const [lineData, setlineData] = useState(processedData);
   const [fallingLinesLoder, setfallingLinesLoder] = useState(true);
   const [processing, setprocessing] = useState(true);

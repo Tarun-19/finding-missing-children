@@ -12,8 +12,8 @@ const App = () => (
       <Routes>
         <Route path='/' element={<LandingPage />} />
         <Route path='/upload-image' element={<UploadImagePage />} />
-        <Route path='/upload-video' element={<UploadVideoPage />} />
-        <Route path='/results' element={<ResultsPage />} />
+        <Route path='/upload-video/:imageName' element={<UploadVideoPage />} />
+        <Route path='/results/:imageName/:videoName' element={<ResultsPage />} />
       </Routes>
     </BrowserRouter>
   </div>
