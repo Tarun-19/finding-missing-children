@@ -6,7 +6,12 @@ import ai from '../assets/ai.png';
 
 
 function UploadImagePage() {
-  const [imageName, setImageName] = useState("test-image");
+  const [imageName, setImageName] = useState("");
+
+  function fileSelectedHandler(event) {
+    setImageName(event.target.files[0].name);
+    //console.log(imageName);
+  }
 
   return (
     <div className="gpt3__header section__padding" id="home">
@@ -14,9 +19,13 @@ function UploadImagePage() {
       <h1 className="gradient__text">Upload Image</h1>
       
       <div className="gpt3__header-content__input">
+
+      <input type="file" onChange={fileSelectedHandler} />
+
       <Link to={`/upload-video/${imageName}`}>
           <button className="round-button">Next</button>
         </Link>
+
       </div>
       
     </div>

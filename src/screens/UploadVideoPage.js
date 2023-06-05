@@ -7,14 +7,20 @@ import ai from '../assets/ai.png';
 
 function UploadVideoPage() {
     const { imageName } = useParams();
-    console.log(imageName)
-    const [videoName, setvideoName] = useState("test-video");
+    console.log(imageName);
+    const [videoName, setvideoName] = useState("");
+
+    function fileSelectedHandler(event) {
+      setvideoName(event.target.files[0].name);
+      //console.log("from video page"+ videoName);
+    }
   return (
     <div className="gpt3__header section__padding" id="home">
     <div className="gpt3__header-content">
       <h1 className="gradient__text">Upload Video</h1>
       
       <div className="gpt3__header-content__input">
+      <input type="file" onChange={fileSelectedHandler} />
       <Link to={"/results/"+imageName+"/"+videoName}>
         <button className="round-button">Start Poccess</button>
       </Link>
