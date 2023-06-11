@@ -8,11 +8,11 @@ const Possibility = () => (
       <img src={possibilityImage} alt="possibility" />
     </div>
     <div className="gpt3__possibility-content">
-      <h1 className="gradient__text">The possibilities are <br /> beyond your imagination</h1>
+      <h1 className="gradient__text">The possibilities are <br /> beyond our imagination</h1>
       <p>AI has unlocked the ability to generate future images, providing a glimpse into what lies ahead. Using generative models like GANs and autoregressive models, we can create new, realistic images that depict potential future scenarios. While these images are speculative and not definitive predictions, they offer a creative and thought-provoking avenue for exploration.</p>
-      <h4>1. Generative Adversarial Networks (GANs).</h4>
-      <h4>2. Autoregressive Models.</h4>
-      <h4>3. The Speculative Nature of Future Image Generation.</h4>
+      <h4 className="gradient__text">1. Generative Adversarial Networks (GANs).</h4>
+      <h4 className="gradient__text">2. Autoregressive Models.</h4>
+      <h4 className="gradient__text">3. The Speculative Nature of Future Image Generation.</h4>
     </div>
   </div>
 );
