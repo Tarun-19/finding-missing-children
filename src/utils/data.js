@@ -1,4 +1,4 @@
-const processedData = [
+export default processedData = [
   [1, 20],
   [2, 10],
   [3, 40],
@@ -71,4 +71,6 @@ const processedData = [
   [70, 4.2],
 ];
 
-module.exports = processedData;
+// module.exports = processedData;
+
+// export default processedData;

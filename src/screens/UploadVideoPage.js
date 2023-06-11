@@ -11,9 +11,10 @@ function UploadVideoPage() {
     const [videoName, setvideoName] = useState("");
 
     function fileSelectedHandler(event) {
-      setvideoName(event.target.files[0].name);
-      //console.log("from video page"+ videoName);
+      const str = event.target.files[0].name;
+      setvideoName(str.slice(0, str.indexOf('.')));
     }
+    
   return (
     <div className="gpt3__header section__padding" id="home">
     <div className="gpt3__header-content">
