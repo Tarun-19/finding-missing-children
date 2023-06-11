@@ -9,8 +9,8 @@ function UploadImagePage() {
   const [imageName, setImageName] = useState("");
 
   function fileSelectedHandler(event) {
-    setImageName(event.target.files[0].name);
-    //console.log(imageName);
+    const str = event.target.files[0].name;
+    setImageName(str.slice(0, str.indexOf('.')));
   }
 
   return (
