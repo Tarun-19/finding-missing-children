@@ -5,6 +5,10 @@
   scroll-behavior: smooth;
 }
 
+.chart-container {
+  background-color: red;
+}
+
 body {
   background: var(--color-bg);
 }
