@@ -5,6 +5,7 @@ import { FallingLines } from "react-loader-spinner";
 import BarLoader from "react-bar-loader";
 import { useParams } from "react-router-dom";
 import { generateGraphData } from "../utils/helper";
+import "../App.css"; 
 
 function ResultsPage() {
   const { imageName, videoName } = useParams();
@@ -23,7 +24,11 @@ function ResultsPage() {
       title: "Probe image matching line graph representation",
       subtitle: "Percentage match Vs Video's timeline",
     },
+  colors: ['#FB7A21'],
   };
+
+  // var chart = new Chart(document.getElementById("myChart"), options);
+  // chart.style.backgroundColor = "red";
 
   useEffect(() => {
     setTimeout(() => {
@@ -45,22 +50,31 @@ function ResultsPage() {
   }, [fallingLinesLoder]);
 
   return (
-    <div className="gpt3__header section__padding" id="home">
-      <div className="gpt3__header-content" style={{ textAlign: "center" }}>
-        <h1 className="gradient__text">Results Page</h1>
-        {!processing && !fallingLinesLoder && lineData && lineData.length && (
+    <div className="gpt3__header section__padding" id="home" >
+      <div style={{
+          flex: 1,
+          display: "flex",
+          justifyContent: "flex-start",
+          alignItems: "center",
+          flexDirection: "column",
+        
+        }}>
+        <h1 className="gradient__text" >Results Page</h1>
+        {!processing && !fallingLinesLoder && (
           <Chart
             chartType="Line"
             width="99%"
-            height="400px"
+            height="400px" 
             data={[["Video timeline", "Percentage Match"], ...lineData]}
             options={options}
             style={{
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
+              marginTop:"20px",
+              
             }}
-          />
+        />
         )}
 
         {processing && !fallingLinesLoder && (
