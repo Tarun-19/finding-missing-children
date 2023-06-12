@@ -4,8 +4,8 @@ import { Chart } from "react-google-charts";
 import { FallingLines } from "react-loader-spinner";
 import BarLoader from "react-bar-loader";
 import { useParams } from "react-router-dom";
-import { generateGraphData } from "../utils/helper";
-import "../App.css"; 
+import { generateGraphData, getMaxima } from "../utils/helper";
+import "../App.css";
 
 function ResultsPage() {
   const { imageName, videoName } = useParams();
@@ -18,13 +18,15 @@ function ResultsPage() {
 
   const [fallingLinesLoder, setfallingLinesLoder] = useState(true);
   const [processing, setprocessing] = useState(true);
+  const [maxima, setmaxima] = useState(0);
+  const [dataArray, setdataArray] = useState([]);
 
   const options = {
     chart: {
       title: "Probe image matching line graph representation",
       subtitle: "Percentage match Vs Video's timeline",
     },
-  colors: ['#FB7A21'],
+    colors: ["#FB7A21"],
   };
 
   // var chart = new Chart(document.getElementById("myChart"), options);
@@ -34,7 +36,7 @@ function ResultsPage() {
     setTimeout(() => {
       setfallingLinesLoder(false);
       setprocessing(true);
-    }, 1000);
+    }, 10);
   }, []);
 
   useEffect(() => {
@@ -44,37 +46,54 @@ function ResultsPage() {
       const data = generateGraphData(imageName, videoName);
       if (data && data.length) {
         setlineData(data);
+        setmaxima(getMaxima(data));
+        setdataArray(data);
         setprocessing(false);
       }
-    }, 1000);
+    }, 10);
   }, [fallingLinesLoder]);
 
   return (
-    <div className="gpt3__header section__padding" id="home" >
-      <div style={{
+    <div className="gpt3__header section__padding" id="home">
+      <div
+        style={{
           flex: 1,
           display: "flex",
           justifyContent: "flex-start",
           alignItems: "center",
           flexDirection: "column",
-        
-        }}>
-        <h1 className="gradient__text" >Results Page</h1>
+        }}
+      >
+        <h1 className="gradient__text" style={{fontSize: 45}}>Results Page</h1>
         {!processing && !fallingLinesLoder && (
           <Chart
             chartType="Line"
             width="99%"
-            height="400px" 
+            height="400px"
             data={[["Video timeline", "Percentage Match"], ...lineData]}
             options={options}
             style={{
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
-              marginTop:"20px",
-              
+              marginTop: "20px",
             }}
-        />
+          />
+        )}
+
+        {!processing && !fallingLinesLoder && (
+          <div style={{ marginTop: "5%" }}>
+            <h1 className="gradient__text" style={{fontSize: 20}}>
+              Child found at timestamp: {maxima + 1} sec{" "}
+            </h1>
+          </div>
+        )}
+        {!processing && !fallingLinesLoder && (
+          <div style={{marginTop: "1%"}}>
+            <h1 className="gradient__text" style={{fontSize: 20}}>
+              Maximum match: {dataArray[maxima][1]}%
+            </h1>
+          </div>
         )}
 
         {processing && !fallingLinesLoder && (

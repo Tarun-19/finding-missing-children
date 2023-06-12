@@ -153,13 +153,22 @@ var database = [
       [15, 50],
       [16, 20],
       [17, 21],
-      [18, 53],
+      [18, 67],
       [19, 54],
       [20, 47],
     ],
   },
 ];
 
+const getMaxima = (arr) => {
+  let pos = 0;
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[pos][1] < arr[i][1]) pos = i;
+  }
+  return pos;
+};
+
 module.exports = {
   generateGraphData,
+  getMaxima,
 };
